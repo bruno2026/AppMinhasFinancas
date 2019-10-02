@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MinhasFinancas.DAL;
 using MinhasFinancas.Models;
 
 namespace MinhasFinancas
@@ -36,6 +37,8 @@ namespace MinhasFinancas
             services.AddDbContext<AppDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), builder => 
                     builder.MigrationsAssembly("MinhasFinancas")));
+
+            services.AddTransient<IFinancasDAL, FinancasDAL>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
